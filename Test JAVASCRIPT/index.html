@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html lang="fr">
+
+<head>
+   <meta charset="utf-8">
+   <title>Test JS</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <p>Bonjour! veuillez trouver la bonne réponse  <br\>
+   </p>
+   <h1>
+      Le calcul à faire: <span id="calc1"></span> + <span id="calc2"></span> = ?
+   </h1>
+   <form>
+      <label for="essayer"> Essayer : </label> <input type="text" id="essayer">
+      <input type="button" value="vérifier" onclick="Tester()" id="b">
+
+   </form>
+
+
+   <div>
+      <p id="resultat"></p>
+      <p id="t"></p>
+
+
+   </div>
+   <div id="tab"></div>
+   <script>
+
+var randnumbr1 = Math.floor(Math.random() * 100);
+var randnumbr2 = Math.floor(Math.random() * 100);
+document.getElementById("calc1").innerHTML = randnumbr1;
+document.getElementById("calc2").innerHTML = randnumbr2;
+const somme = randnumbr1 + randnumbr2;
+const affichhistorique = document.getElementById('t');
+const resultat = document.getElementById('resultat');
+const essayer = document.getElementById('essayer');
+const b = document.getElementById('b');
+var nbressai = 0;
+var myArray = new Array();
+var myArray2 = new Array();
+
+      function Tester() {
+         nbressai++;
+         var nbruser = Number(essayer.value);
+         myArray.push(nbruser);
+         myArray2.push(nbruser);
+
+
+
+         if ((nbressai === 1) && (nbruser === somme)) {
+
+            alert("Bravo! Vous avez trouvé la bonne réponse ");
+            b.disabled = true;
+         }
+
+         else if ((nbressai === 3) && (nbruser !== somme)) {
+            resultat.textContent = 'Vous avez échoué ! le bon nombre est: '+ somme ;
+            affichhistorique.textContent='vos essais: '
+            document.getElementById("tab").innerHTML = myArray2.join();
+            b.disabled = true;
+         }
+
+
+         else if (nbruser === somme) {
+            resultat.textContent = 'vous avez trouvé le bon nombre '+ somme + ' mais vous pouvez faire mieux';
+            affichhistorique.textContent='vos essais: '
+            myArray.splice(nbressai-1, 1);
+            document.getElementById("tab").innerHTML = myArray.join();
+            b.disabled = true;
+         }
+
+         else resultat.textContent = 'Faux! essayer à nouveau';
+
+         essayer.focus();
+         essayer.value = '';
+      }
+   </script>
+
+</body>
+
+</html>
