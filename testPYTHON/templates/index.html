@@ -1,0 +1,58 @@
+﻿{%extends "base.html"%}
+{% block content %}
+
+<p>Bonjour, {{nom}} {{prénom}} . Bienvenue ! <br\>
+</p>
+
+<p>Veuillez trouver la bonne réponse <br\>
+</p>
+
+<form>
+  <label for="essayer"> Essayer : </label> <input type="text" id="essayer">
+  <input type="button" value="vérifier" onclick="Tester()" id="b">
+</form>
+
+<h1>
+  Le calcul à faire: <span id="calc1"></span> + <span id="calc2"></span> = ?
+</h1>
+
+<div>
+  <p id="resultat"></p>
+</div>
+
+<script>
+  var randnumbr1 = Math.floor(Math.random() * 100);
+  var randnumbr2 = Math.floor(Math.random() * 100);
+  const somme = randnumbr1 + randnumbr2;
+  document.getElementById("calc1").innerHTML = randnumbr1;
+  document.getElementById("calc2").innerHTML = randnumbr2;
+  const resultat = document.getElementById('resultat');
+  const essayer = document.getElementById('essayer');
+  const b = document.getElementById('b');
+  var nbressai = 0;
+  function Tester() {
+
+    var nbruser = Number(essayer.value);
+    nbressai++;
+        if (nbruser === somme) {
+          resultat.textContent = '';
+         alert('bravo ! vous avez trouvé la réponse en ' + nbressai + ' fois');
+          b.disabled = true;
+        }
+
+       else if (nbressai >= 5) {
+        alert('Vous avez dépassé 5 essais, essayez à nouveau');
+        window.location.href = "../signup";
+         }
+             else
+      resultat.textContent = 'Faux!! essayer à nouveau';
+
+ essayer.value = '';
+ essayer.focus();
+
+  }
+
+
+</script>
+
+{%endblock%}

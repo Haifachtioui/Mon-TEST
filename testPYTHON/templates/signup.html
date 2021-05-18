@@ -1,0 +1,32 @@
+{%extends "base.html"%} 
+{% block content %}
+
+<h3> Veuillez remplir les champs suivants : </h2>
+<form action="/index" method="post">
+<p>
+{{form.nom.label}} <br>
+{{form.nom(size=30)}}
+
+</p>
+<p>
+    {{form.prénom.label}} <br>
+    {{form.prénom(size=30)}}
+    
+    </p>
+   
+ 
+<p>
+        {{form.email.label}} <br>
+        {{form.email(size=100)}}
+        
+</p>
+
+    <p>
+        {{form.submit}} <br>
+
+        </p>
+
+
+</form>
+
+{%endblock%}
